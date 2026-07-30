@@ -1,16 +1,23 @@
-# React + Vite
+# Time Slot Booking Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This is a full-stack web application built for the Rotaract Club of University of Moratuwa IT Team Recruitment. It allows users to book time slots while strictly preventing overlapping bookings.
 
-Currently, two official plugins are available:
+## Technology Stack
+* **Frontend:** React (Vite), Tailwind CSS
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB Atlas (Mongoose for Schema validation)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Setup Instructions
+To run this project locally:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+1. **Clone the repository:**
+   `git clone https://github.com/yourusername/rotaract-it-task-booking.git`
+2. **Install dependencies:**
+   * Navigate to the `backend` folder and run `npm install`.
+   * Navigate to the `frontend` folder and run `npm install`.
+3. **Environment Variables:**
+   * In the `backend` folder, create a `.env` file and add: `MONGO_URI=your_mongodb_connection_string` and `PORT=5000`
+4. **Run the Application:**
+   * Open two terminals.
+   * Terminal 1 (Backend): `cd backend` -> `npm run start` (or `npx nodemon server.js`)
+   * Terminal 2 (Frontend): `cd frontend` -> `npm run dev`
