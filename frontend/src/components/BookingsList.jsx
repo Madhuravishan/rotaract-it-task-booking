@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
+// Vite uses import.meta.env to read environment variables.
+// If the variable doesn't exist (like on our laptop), it falls back to localhost.
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/bookings';
+
 export default function BookingsList() {
   const [bookings, setBookings] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // ✅ CORRECT EXACT URL
-    fetch('http://localhost:5000/api/bookings')
+    // ✅ Now using the dynamic API_URL
+    fetch(API_URL)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch from server');
         return res.json();

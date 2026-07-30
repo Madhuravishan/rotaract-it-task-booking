@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+// Vite uses import.meta.env to read environment variables.
+// If the variable doesn't exist (like on our laptop), it falls back to localhost.
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/bookings';
+
 export default function BookingForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -14,8 +18,8 @@ export default function BookingForm() {
     setStatus('Loading...');
 
     try {
-      // ✅ CORRECT EXACT URL
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      // ✅ Now using the dynamic API_URL
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
