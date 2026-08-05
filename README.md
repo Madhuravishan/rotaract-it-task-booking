@@ -1,60 +1,172 @@
-# Rotaract IT Task Booking
+Here is a complete, clean `README.md` file designed for your project repository:
 
-A task booking application for Rotaract IT — frontend and backend written in JavaScript. This repository contains both the frontend and backend parts of the application. Both parts are deployed to Vercel.
+```markdown
+# Rotaract IT Task - Time Slot Booking App
 
-# Time Slot Booking Web Application
+A full-stack web application built for time-slot booking and recruitment coordination. The project is structured as a monorepo consisting of a React (Vite) frontend and an Express serverless backend connected to MongoDB Atlas, both deployed seamlessly on Vercel.
 
-This is a full-stack web application built for the Rotaract Club of University of Moratuwa IT Team Recruitment. It allows users to book time slots while strictly preventing overlapping bookings.
+---
 
-## Technology Stack
-* **Frontend:** React (Vite), Tailwind CSS
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB Atlas (Mongoose for Schema validation)
+## 🛠️ Tech Stack
 
-## Setup Instructions
-To run this project locally:
+### Frontend
+* **Framework:** React.js (Bootstrapped with Vite)
+* **Styling:** CSS / Tailwind CSS
 
-1. **Clone the repository:**
-   `git clone https://github.com/yourusername/rotaract-it-task-booking.git`
-2. **Install dependencies:**
-   * Navigate to the `backend` folder and run `npm install`.
-   * Navigate to the `frontend` folder and run `npm install`.
-3. **Environment Variables:**
-   * In the `backend` folder, create a `.env` file and add: `MONGO_URI=your_mongodb_connection_string` and `PORT=5000`
-4. **Run the Application:**
-   * Open two terminals.
-   * Terminal 1 (Backend): `cd backend` -> `npm run start` (or `npx nodemon server.js`)
-   * Terminal 2 (Frontend): `cd frontend` -> `npm run dev`
+### Backend
+* **Runtime:** Node.js
+* **Framework:** Express.js
+* **Database:** MongoDB Atlas (Mongoose ORM)
+* **Hosting:** Vercel Serverless Functions
 
-## Project
-This app provides booking and management features for IT tasks/events. The frontend is a JavaScript-based SPA (React/Next/Vite) and the backend is a JavaScript API (Node/Express or serverless functions). Both are deployed on Vercel for fast hosting and serverless function support.
+---
 
-## Tech stack
-- JavaScript (frontend + backend)
-- CSS / HTML for UI
-- Vercel for hosting (frontend and backend)
-- Optional: a database (Postgres, MongoDB, etc.) or third-party auth
+## 📂 Repository Structure
 
-## Features
-- Create, view, and manage task bookings
-- Authentication (JWT or provider)
-- Admin panel for approvals (if implemented)
-- API endpoints for booking, user, and admin operations
+```text
+booking-app/
+├── backend/
+│   ├── routes/
+│   │   └── bookingRoutes.js
+│   ├── .env
+│   ├── package.json
+│   ├── server.js
+│   └── vercel.json
+└── frontend/
+    ├── src/
+    │   ├── components/
+    │   │   ├── BookingForm.jsx
+    │   │   └── BookingsList.jsx
+    │   ├── App.jsx
+    │   └── main.jsx
+    ├── index.html
+    ├── package.json
+    └── vite.config.js
 
-## Repository layout
-(Adjust paths below to match your repo structure)
-- /frontend — frontend application
-- /backend — backend API or serverless functions
-- /README.md — this file
+```
 
-## Prerequisites
-- Node.js (v16+ recommended)
-- npm or yarn
-- (Optional) Vercel account & Vercel CLI for local testing
+---
 
-## Local setup
+## 🚀 Getting Started Locally
 
-Clone the repo
+### Prerequisites
+
+* [Node.js](https://nodejs.org/) (v18 or higher)
+* [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account and database URI
+
+### 1. Clone the Repository
+
 ```bash
-git clone https://github.com/Madhuravishan/rotaract-it-task-booking.git
+git clone [https://github.com/Madhuravishan/rotaract-it-task-booking.git](https://github.com/Madhuravishan/rotaract-it-task-booking.git)
 cd rotaract-it-task-booking
+
+```
+
+### 2. Backend Setup
+
+```bash
+cd backend
+npm install
+
+```
+
+Create a `.env` file in the `backend` folder:
+
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/booking-app?retryWrites=true&w=majority
+
+```
+
+Run the backend server:
+
+```bash
+npm start
+
+```
+
+### 3. Frontend Setup
+
+Open a new terminal tab:
+
+```bash
+cd frontend
+npm install
+
+```
+
+Create a `.env` file in the `frontend` folder:
+
+```env
+VITE_API_URL=http://localhost:5000/api/bookings
+
+```
+
+Run the development server:
+
+```bash
+npm run dev
+
+```
+
+---
+
+## 🌐 Deployment Configuration (Vercel)
+
+This project is deployed as two separate services on Vercel:
+
+### Backend Project (`rotaract-booking-backend`)
+
+* **Root Directory:** `backend`
+* **Environment Variables:**
+* `MONGO_URI`: Your full MongoDB Atlas connection string.
+
+
+* **Serverless Configuration (`backend/vercel.json`):**
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ]
+}
+
+```
+
+### Frontend Project (`rotaract-booking-frontend`)
+
+* **Framework Preset:** `Vite`
+* **Root Directory:** `frontend`
+* **Environment Variables:**
+* `VITE_API_URL`: `https://rotaract-booking-backend.vercel.app/api/bookings`
+
+
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| **GET** | `/api/bookings` | Fetch all scheduled time slot bookings |
+| **POST** | `/api/bookings` | Create a new time slot booking |
+
+---
+
+## 📝 License
+
+This project is open-source and available under the [MIT License](https://www.google.com/search?q=LICENSE).
+
+```
+
+```
