@@ -1,38 +1,33 @@
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
-const bookingRoutes = require('./routes/bookingRoutes'); // Import the routes
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.use(cors()); 
-app.use(express.json()); 
+// Connection caching for Vercel serverless functions
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected) return;
+  try {
+    const db = await mongoose.connect(process.env.MONGO_URI);
+    isConnected = db.connections[0].readyState;
+    console.log("MongoDB Connected successfully");
+  } catch (err) {
+    console.error("MongoDB Connection Error:", err);
+  }
+};
 
-// Connect to MongoDB
-if (process.env.MONGO_URI) {
-  mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('✅ Connected to MongoDB Database'))
-    .catch((err) => console.error('❌ MongoDB Connection Error: ', err));
-} else {
-  console.error('❌ MONGO_URI is missing in environment variables');
-}
-
-// Route API requests
-app.use('/api/bookings', bookingRoutes);
-
-// Root test route to verify server health
-app.get('/api', (req, res) => {
-  res.json({ message: 'Backend API is running on Vercel!' });
+// Ensure database is connected before handling any route
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
 });
 
-// Only start the port listener when running locally (not on Vercel)
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-}
+// Your routes
+const bookingRoutes = require('./routes/bookingRoutes'); // verify path
+app.use('/api/bookings', bookingRoutes);
 
-// Export Express app for Vercel Serverless Functions
 module.exports = app;
