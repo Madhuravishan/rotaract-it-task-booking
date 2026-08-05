@@ -1,6 +1,3 @@
-Here is a complete, clean `README.md` file designed for your project repository:
-
-```markdown
 # Rotaract IT Task - Time Slot Booking App
 
 A full-stack web application built for time-slot booking and recruitment coordination. The project is structured as a monorepo consisting of a React (Vite) frontend and an Express serverless backend connected to MongoDB Atlas, both deployed seamlessly on Vercel.
@@ -42,6 +39,7 @@ booking-app/
     ├── index.html
     ├── package.json
     └── vite.config.js
+
 
 ```
 
